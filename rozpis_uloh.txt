@@ -1,0 +1,9 @@
+14.10 - 21.10: vybrať si programovací jazyk, mikrokontrolér a iný použití softvér
+22.10 - 29.10: vytvoriť základnú štruktúru programov, urobiť si osnovu fungovania všetkých
+30.10 - 6.11: napísať program, ktorý bude sledovať pakety na sieti, na ktorej som prihlásený
+7.11 - 14.11: vytvoriť program, ktorý bude vytvárať vlastné pakety, potomich pošle do sieťe
+15.11 - 22.11: vytvoriť program, ktorý zistí otvorené porty na sieti a poprípade ich zraniteľnosti
+23.11 - 7.12: vytvoriť program, ktorý by dokázal detegovat anomalie v siete (bonus: zistí na základe anomálií, či je sieť kompromitovaná)
+8.12 - 15.12: vytvoriť program, ktorý by dokázal zistiť, či je sieť skutočná alebo dvojník
+16.12 - 20.12: vytvoriť hlavný program, ktorý bude spúštať predtým napísané programy podľa požiadavok užívateľa
+21.12 -: dat mikrokontrolér na dron a už len doladovať detaily
