@@ -1,0 +1,5 @@
+mikrokontrolér: raspberry pi zero w 2
+programovacie jayzky: python, bash
+predstiahnutý softvér: openssh
+pouzivane python kniznice: socket, scapy, os
+dron: RC dron syma X36
