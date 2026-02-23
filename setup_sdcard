@@ -1,0 +1,41 @@
+#!/bin/bash
+
+main(){
+	echo "[+] Opravujem sd kartu..."
+	echo "tmpfs    /tmp            tmpfs    defaults,noatime,nosuid,size=100m    0    0"
+	echo "tmpfs    /var/tmp        tmpfs    defaults,noatime,nosuid,size=30m     0    0"
+	echo "tmpfs    /var/log        tmpfs    defaults,noatime,nosuid,size=50m     0    0"
+	read -p "[+] Zapisanie toto do /etc/fstab moze pomoct, chces zapisat? [y/n]" fstabchoice
+	if [[ $stabchoice -eq "y" ]];then
+		sudo echo "tmpfs    /tmp            tmpfs    defaults,noatime,nosuid,size=100m    0    0" >> /etc/fstab
+		sudo echo "tmpfs    /var/tmp        tmpfs    defaults,noatime,nosuid,size=30m     0    0" >> /etc/fstab
+		sudo echo "tmpfs    /var/log        tmpfs    defaults,noatime,nosuid,size=50m     0    0" >> /etc/fstab
+	else
+		echo "[+] Nezapisujem do /etc/fstab"
+	fi
+	read -p "[+] Pridat Ovelay switch moze pomoct tiez, zapisanim 'dtoverlay=gpio-shutdown' do /boot/config.txt, chces zapisat?[y/n]" overlaychoice
+	if [[ $overlaychoice -eq "y" ]];then
+		if [[ ! -f /boot/config.txt ]];then
+			echo "[-] Subor /boot/config.txt neexistuje, hladam subor /boot/fimware/config.txt..."
+			sleep 0.5
+			if [[ ! -f "/boot/fimware/config.txt" ]];then
+				echo "[!] nemas ani jeden subor, to neni dobre"
+			else
+				echo "Subor najdeny, zapisujem..."
+				sudo echo "dtoverlay=gpio-shutdown" >> /boot/firmware/config.txt
+			fi
+		else
+			echo "Subor /boot/config.txt existuje, zapisujem..."
+			sudo echo "dtoverlay=gpio-shutdown" >> /boot/config.txt
+		fi
+	else
+		echo "[+] Nevytvaram Overlay switch"
+	fi
+
+	echo "Typ: ak je karta nahodou poskodena, spusti prikaz na inom linuxovom stroji: sudo fsck -fy /dev/'nazov sdkarty' "
+	echo "Typ 2: pred spustenim prikazu shutdown, spusti predtym prikaz 'sync'"
+
+}
+
+
+main
