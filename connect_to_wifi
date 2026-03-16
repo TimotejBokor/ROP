@@ -1,0 +1,35 @@
+#!/bin/bash
+
+if [[ $UID -ne 0 ]];then
+	echo -e '\033[1;31m' "[!] Zapni skript ako root alebo so sudo! \033[0m"
+	exit 1
+fi
+
+if [[ ! -f /bin/nmcli || ! -f /usr/bin/nmcli ]];then
+	read -p "[-] Neni stiahnuty program nmcli, chces stiahnut[y/n]: " choice
+	case $choice in
+		y | Y | yes | Yes | YES )
+			sudo apt install nmcli -y
+		;;
+		* )
+			echo "Bez nmcli nemozem pokracovat"
+			exit 0
+		;;
+	esac
+fi
+
+echo "Skenujem siete v okoli..."
+sudo nmcli dev wifi rescan
+sudonmcli dev wifi list
+
+read -p "Zadaj SSID: " ssid
+read -s -p "Zadaj heslo k sieti" password
+
+sudo nmcli dev wifi connect $ssid  password $password
+
+if [[ $? -eq 0 ]];then
+	echo "[+] Uspesne pripojeny"
+else
+	echo -e "\033[1;31m [!] Nastal problem pri pripojeni! \033[0m"
+	exit 1
+fi
